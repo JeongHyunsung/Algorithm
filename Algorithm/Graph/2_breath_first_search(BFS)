@@ -1,0 +1,36 @@
+from queue import *
+
+
+def BFS(g, s):
+    print(g)
+    print("BFS")
+    q = Queue()
+    print(q.qsize())
+    q.put(s)
+    dist = [float("inf")] * len(g)
+    dist[s] = 0
+    print(q.qsize())
+    while q.qsize() != 0:
+        cur = q.get()
+        for nxt in g[cur]:
+            if dist[nxt] == float("inf"):
+                dist[nxt] = dist[cur] + 1
+                q.put(nxt)
+    return dist
+
+    
+n = 10
+edge_number = 8
+print("HS")
+gph = {}
+for i in range(n):
+    gph[i] = []
+print("HS")
+for eg in range(edge_number):
+    a, b = map(lambda x:int(x)-1, input().split())
+    gph[a].append(b)
+    gph[b].append(a)
+print("HS")
+d = BFS(gph, 3)
+
+print(d)
