@@ -1,10 +1,5 @@
 # 2024-05-17 CF round 945
 
-Brute force
-Divide and conquer
-Search and enumeration
-dynamic programming
-
 
 ## A 
 ### Active
@@ -40,7 +35,4 @@ arr: 5 10 9 1 8 2 7 3 6 4
 ans: 5 6 1 10 2 9 3 8 4 7  
 sum: 10 16 10 11 10 11 10 11 10 11  
 최악의 경우에도 local maxima가 n//2 - 1 개 만큼 만들어지네. 완벽한 증명은 아니지만 충분히 사용할 수 있겠어.
-
-
-
 
