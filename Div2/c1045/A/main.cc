@@ -44,21 +44,15 @@ vector<vector<T>> read_matrix(int n, int m){
 }
 
 void solve(){
-    ull n;
-    cin >> n;
-    vector<ull> h(n);
-    cin >> h;
-
-    vector<ull> dp(n+1);
-    dp[n-1] = 0; dp[n] = 0;
-    for (ull i = n-1; i>0; i--){
-        dp[i-1] = max(dp[i+1] + h[i-1], dp[i]);
-    }
-    cout << dp << nl;
-
+    ull n, a, b;
+    cin >> n >> a >> b;
+    if (n%2 != b%2) cout << "NO" << nl;
+    else if(b<a && n%2 != a%2) cout << "NO" << nl;
+    else cout << "YES" << nl;
 }
 
 int main(){
+
 
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
