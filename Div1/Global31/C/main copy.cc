@@ -43,27 +43,46 @@ vector<vector<T>> read_matrix(int n, int m){
     return a;
 }
 
-void solve(){
-    ull n;
-    cin >> n;
-    vector<ull> a(n);
-    cin >> a;
-    // a b c d e    b>a+c, d>c+e, --> worst case condition
-    // 
-    ull ans = 0;
-    if (n%2 == 0) a.push_back(0);
 
-    for (ull i = 1; i < n; i += 2){
-        if (a[i] > a[i-1] + a[i+1]) continue;
-        else{
-            ull req = a[i-1] + a[i+1] - a[i];
-            ans += req;
-            a[i+1] -= min(a[i+1], req);
+void solve(){
+    ll n, k;
+    cin >> n >> k;
+    // because a[i] < n, we cannot extend more significant digits.
+    // to maximize sum of a[i], all we need is to make each digit k times if digit is 0, else k-1 times.
+    vector<bitset<64>> bits(k);
+
+    bitset<64> n_2bit(n);
+    cout << n_2bit << nl;
+    bool flag = false;
+    bool k_is_odd = (k%2 == 1);
+    for(int i=63; i>=0; i--){
+        if(!n_2bit[i] && !flag){
+            continue;
+        }
+        if(n_2bit[i]) flag = true;
+
+        for(int j=0; j<k; j++){
+            
+            if(n_2bit[i]){
+                // required odd number
+                bits[j][i] = 1;
+                if(!k_is_odd){
+                    bits[k-1][i] = 0;
+                }
+            }
+            else{
+                // required even number
+                bits[j][i] = 1;
+                if(k_is_odd){
+                    bits[k-1][i] = 0;
+                }
+            }
         }
     }
 
-    cout << ans << nl;
-
+    for(auto& b: bits){
+        cout << b.to_ullong() << ' ';
+    }
 }
 
 int main(){
@@ -78,3 +97,4 @@ int main(){
         solve();
     }
     return 0;
+}

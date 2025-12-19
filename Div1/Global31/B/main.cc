@@ -43,27 +43,21 @@ vector<vector<T>> read_matrix(int n, int m){
     return a;
 }
 
+
 void solve(){
-    ull n;
+    int n;
     cin >> n;
-    vector<ull> a(n);
+
+    vector<string> a(n);
     cin >> a;
-    // a b c d e    b>a+c, d>c+e, --> worst case condition
-    // 
-    ull ans = 0;
-    if (n%2 == 0) a.push_back(0);
 
-    for (ull i = 1; i < n; i += 2){
-        if (a[i] > a[i-1] + a[i+1]) continue;
-        else{
-            ull req = a[i-1] + a[i+1] - a[i];
-            ans += req;
-            a[i+1] -= min(a[i+1], req);
-        }
+    string ans = a[0];
+
+    for(int i=1; i<n; i++){
+        string cur = a[i];
+        ans = min(cur+ans, ans+cur);
     }
-
     cout << ans << nl;
-
 }
 
 int main(){
@@ -78,3 +72,4 @@ int main(){
         solve();
     }
     return 0;
+}

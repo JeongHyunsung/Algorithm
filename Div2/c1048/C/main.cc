@@ -43,27 +43,35 @@ vector<vector<T>> read_matrix(int n, int m){
     return a;
 }
 
-void solve(){
-    ull n;
-    cin >> n;
-    vector<ull> a(n);
-    cin >> a;
-    // a b c d e    b>a+c, d>c+e, --> worst case condition
-    // 
-    ull ans = 0;
-    if (n%2 == 0) a.push_back(0);
 
-    for (ull i = 1; i < n; i += 2){
-        if (a[i] > a[i-1] + a[i+1]) continue;
+void solve(){
+    ull k, x;
+    cin >> k >> x;
+    // 쇼콜라가 바닐라(반대도 개능)한테 반띵할수 있음 (짝수일때만) 
+
+    ull start = 1;
+    ull end = (1ULL<<(k+1)) - 1;
+    deque <int> path;
+
+    while (start <= x && end >= x){
+        ull mid = (start + end) / 2;
+        if(x == mid) break;
+        else if(x < mid){
+            path.push_front(0);
+            end = mid - 1;
+        }
         else{
-            ull req = a[i-1] + a[i+1] - a[i];
-            ans += req;
-            a[i+1] -= min(a[i+1], req);
+            path.push_front(1);
+            start = mid + 1;
         }
     }
-
-    cout << ans << nl;
-
+    // print path
+    cout << path.size() << nl;
+    for(auto &dir : path){
+        if(dir == 0) cout << 1 << " ";
+        else cout << 2 << " ";
+    }
+    cout << nl;
 }
 
 int main(){
@@ -78,3 +86,4 @@ int main(){
         solve();
     }
     return 0;
+}

@@ -43,27 +43,24 @@ vector<vector<T>> read_matrix(int n, int m){
     return a;
 }
 
+
 void solve(){
-    ull n;
-    cin >> n;
-    vector<ull> a(n);
+    ll n, m;
+    cin >> n >> m;
+    vector<ll> a(n);
     cin >> a;
-    // a b c d e    b>a+c, d>c+e, --> worst case condition
-    // 
-    ull ans = 0;
-    if (n%2 == 0) a.push_back(0);
 
-    for (ull i = 1; i < n; i += 2){
-        if (a[i] > a[i-1] + a[i+1]) continue;
-        else{
-            ull req = a[i-1] + a[i+1] - a[i];
-            ans += req;
-            a[i+1] -= min(a[i+1], req);
-        }
+    // m초가 주어졌다면, 마지막 m초가 끝날때, 가장 좋은 oven 으로 가야함.
+    sort(all(a));
+    ll ans = 0;
+
+    ll cur = n-1;
+    while(cur >= 0 && m > 0){
+        ans += a[cur] * m;
+        cur --;
+        m --;
     }
-
     cout << ans << nl;
-
 }
 
 int main(){
@@ -78,3 +75,4 @@ int main(){
         solve();
     }
     return 0;
+}
