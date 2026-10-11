@@ -16,7 +16,7 @@ ostream& operator<<(ostream& os, const vector<T>& v){
         if(i) os << ' ';
         os << v[i];
     }
-    return os; 
+    return os;
 }
 
 template<class T>
@@ -44,7 +44,8 @@ vector<vector<T>> read_matrix(int n, int m){
 }
 
 void solve(){
-    cout << "hello" << nl;
+    cout << "hello workd" << nl;
+
 }
 
 int main(){
